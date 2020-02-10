@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  api:
+    image: lapwing/damage-report:v1.0.0-alpha.1
+    ports:
+      - ${EXPOSED_PORT_API:-8000}:8000
+
+  board:
+    build: .
+    volumes:
+      - ./package.json:/app/package.json
+      - ./package-lock.json:/app/package-lock.json
+      - ./src:/app/src
+      - ./public:/app/public
+    ports:
+      - ${EXPOSED_PORT_BOARD:-3000}:3000
+    command: npm start
