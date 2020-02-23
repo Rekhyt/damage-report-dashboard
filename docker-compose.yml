@@ -2,7 +2,7 @@ version: '3'
 
 services:
   api:
-    image: lapwing/damage-report:v1.0.0-alpha.1
+    image: lapwing/damage-report:v1.0.0-alpha.11
     ports:
       - ${EXPOSED_PORT_API:-8000}:8000
 
