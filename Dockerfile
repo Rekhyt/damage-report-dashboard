@@ -8,6 +8,9 @@ COPY server.js /app/server.js
 
 WORKDIR /app
 
+ARG API_URL
+ENV REACT_APP_API_URL=${API_URL}
+
 RUN npm i && rm -rf /tmp/* /var/cache/apk/* /root/.npm /root/.node-gyp && npm run build
 
 CMD ["node", "server.js"]

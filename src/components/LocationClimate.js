@@ -12,7 +12,7 @@ export default class extends Component {
     this._locationId = props.locationId
 
     this.state = {
-      locationName: props.locationName,
+      locationName: props.locationId,
       temperature: 0,
       humidity: 0
     }
@@ -24,18 +24,20 @@ export default class extends Component {
   }
 
   _updateValues () {
-    const data = { ...this._repository.data }
+    if (!this._repository.locationClimate || !this._repository.locationClimate[this._locationId]) return
 
-    if (!data[this._locationId]) return
-
-    this.setState({ temperature: data[this._locationId].temperature, humidity: data[this._locationId].humidity })
+    this.setState({
+      locationName: this._repository.locationClimate[this._locationId].locationName,
+      temperature: this._repository.locationClimate[this._locationId].temperature,
+      humidity: this._repository.locationClimate[this._locationId].humidity
+    })
   }
 
   render () {
     return (<div>
       <Card>
         <CardHeader
-          avatar={<Icon path={mdiThermometerLines} style={{ width: 45, height: 45 }}/>}
+          avatar={<Icon path={mdiThermometerLines} style={{ fill: 'white', width: 45, height: 45 }}/>}
           title={<Typography variant={'h3'}>{this.state.locationName}</Typography>}
         />
         <CardContent style={{ textAlign: 'center' }}>

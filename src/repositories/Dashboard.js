@@ -18,7 +18,7 @@ export default class {
     })
   }
 
-  get data () {
-    return this._data
+  get locationClimate () {
+    return this._data.locationClimate
   }
 }
