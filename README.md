@@ -1,6 +1,5 @@
 # damage-report-dashboard
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Build Status](https://travis-ci.org/Rekhyt/damage-report-dashboard.svg?branch=master)](https://travis-ci.org/Rekhyt/damage-report-dashboard)
 [![Latest Tag](https://img.shields.io/github/v/tag/rekhyt/damage-report-dashboard?style=flat)](https://github.com/Rekhyt/damage-report-dashboard/releases)
 
 Damage report, Bob.
