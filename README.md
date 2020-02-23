@@ -28,14 +28,15 @@ Specify a service API location different from http://localhost:8000:<br />
 
 ## Build
 ### Configuration
-* `BUILD_PRODUCTION` - whether to create an optimized production build (*) (Default: "true")
-* `API_URL` - URL to the damage-report service API (**) (Default: `http://localhost:8000`)
-* `TAG` - name of the image tag to be built (Default: `damage-report-dashboard:development`)
+* `BUILD_PRODUCTION` - whether to create an optimized production build (Default: "true") (*)
+* `API_URL` - URL to the damage-report service API (Default: `http://localhost:8000`) (**)
+* `TAG` - desired image tag name (Default: `development`)
 
 (\*) This takes a while, so if you only need a development version you should set this to "false".<br />
 (**) This will only affect the production build where the URL can't be changed after the build has finished.
 
 ### Build & Run
+#### Build amd64 Optimized
 `BUILD_PRODUCTION=true API_URL=http://192.168.1.12:8000 ./build.sh`
 
 To run the production build:<br />
@@ -54,3 +55,6 @@ This will work with the passed API URL:<br />
 
 This will have no effect and run with the API URL that was used during build:<br />
 `docker run --rm -d -p 3000:3000 -e REACT_APP_API_URL=http://192.168.1.5 damage-report-dashboard:development`
+
+#### Build armv7 Optimized
+The above manual applies, just use `build-arm.sh` instead of `build.sh`.

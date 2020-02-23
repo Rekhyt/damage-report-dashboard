@@ -1,4 +1,5 @@
-FROM node:lts-alpine3.9
+ARG IMAGE="node:lts-alpine3.9"
+FROM $IMAGE
 
 COPY ./package.json /app/package.json
 COPY ./package-lock.json /app/package-lock.json
