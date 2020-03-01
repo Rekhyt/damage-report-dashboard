@@ -4,9 +4,6 @@
 buildctl build --frontend dockerfile.v0 \
             --local dockerfile=. \
             --local context=. \
-            --exporter image \
-            --exporter-opt name=eu.gcr.io/rekhyt-damage-report/dashboard:${TRAVIS_TAG}-amd64 \
-            --exporter-opt push=false \
             --frontend-opt platform=linux/amd64 \
             --frontend-opt filename=./Dockerfile \
             --output type=image,name=eu.gcr.io/rekhyt-damage-report/dashboard:${TRAVIS_TAG}-amd64 \
