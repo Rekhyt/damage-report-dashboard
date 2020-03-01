@@ -28,23 +28,18 @@ buildctl build --frontend dockerfile.v0 \
 
 docker images
 
-# re-tag without arch for manifest
-docker tag eu.gcr.io/rekhyt-damage-report/dashboard:${TRAVIS_TAG}-amd64 eu.gcr.io/rekhyt-damage-report/dashboard:${TRAVIS_TAG}
-docker images
-
 # push to GCR
 docker login --username _json_key --password "$(echo ${GC_CREDENTIALS} | base64 --decode -i)" https://eu.gcr.io
-docker push eu.gcr.io/rekhyt-damage-report/dashboard:${TRAVIS_TAG}
 docker push eu.gcr.io/rekhyt-damage-report/dashboard:${TRAVIS_TAG}-amd64
 docker push eu.gcr.io/rekhyt-damage-report/dashboard:${TRAVIS_TAG}-armv7
 
 # create manifests for architectures
 export DOCKER_CLI_EXPERIMENTAL=enabled
-docker manifest create rekhyt-damage-report/dashboard:${TRAVIS_TAG} \
-            rekhyt-damage-report/dashboard:${TRAVIS_TAG}-amd64 \
-            rekhyt-damage-report/dashboard:${TRAVIS_TAG}-armv7
+docker manifest create eu.gcr.io/rekhyt-damage-report/dashboard:${TRAVIS_TAG} \
+            eu.gcr.io/rekhyt-damage-report/dashboard:${TRAVIS_TAG}-amd64 \
+            eu.gcr.io/rekhyt-damage-report/dashboard:${TRAVIS_TAG}-armv7
 
-docker manifest annotate rekhyt-damage-report/dashboard:${TRAVIS_TAG} rekhyt-damage-report/dashboard:${TRAVIS_TAG}-armv7 --arch arm
-docker manifest annotate rekhyt-damage-report/dashboard:${TRAVIS_TAG} rekhyt-damage-report/dashboard:${TRAVIS_TAG}-amd64 --arch amd64
+docker manifest annotate eu.gcr.io/rekhyt-damage-report/dashboard:${TRAVIS_TAG} eu.gcr.io/rekhyt-damage-report/dashboard:${TRAVIS_TAG}-armv7 --arch arm
+docker manifest annotate eu.gcr.io/rekhyt-damage-report/dashboard:${TRAVIS_TAG} eu.gcr.io/rekhyt-damage-report/dashboard:${TRAVIS_TAG}-amd64 --arch amd64
 
-docker manifest push rekhyt-damage-report/dashboard:${TRAVIS_TAG}
+docker manifest push eu.gcr.io/rekhyt-damage-report/dashboard:${TRAVIS_TAG}
