@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-echo $GCR_CREDENTIALS | base64 --decode -i | docker login --username _json_key --password-stdin https://eu.gcr.io
+docker login --username _json_key --password "$(echo $GCR_CREDENTIALS | base64 --decode -i)" https://eu.gcr.io
 
 # amd64
 buildctl build --frontend dockerfile.v0 \
