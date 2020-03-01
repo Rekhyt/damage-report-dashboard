@@ -3,6 +3,8 @@
 
 echo $dummy
 echo ${dummy}
+echo "$dummy"
+echo "${dummy}"
 
 docker login --username _json_key --password "$(echo ${GCR_CREDENTIALS} | base64 --decode -i)" https://eu.gcr.io
 
