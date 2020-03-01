@@ -12,6 +12,8 @@ buildctl build --frontend dockerfile.v0 \
             --opt build-arg:BUILD_PRODUCTION=true \
             --opt build-arg:API_URL=${API_URL}
 
+docker images
+
 
 # arm
 buildctl build --frontend dockerfile.v0 \
@@ -26,6 +28,7 @@ buildctl build --frontend dockerfile.v0 \
             --opt build-arg:BUILD_PRODUCTION=true \
             --opt build-arg:API_URL=${API_URL}
 
+docker images
 
 docker login --username _json_key --password "$(echo ${GC_CREDENTIALS} | base64 --decode -i)" https://eu.gcr.io
 docker push eu.gcr.io/rekhyt-damage-report/dashboard:${TRAVIS_TAG}-amd64
