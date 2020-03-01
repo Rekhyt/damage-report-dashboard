@@ -28,8 +28,13 @@ buildctl build --frontend dockerfile.v0 \
 
 docker images
 
+# re-tag without arch for manifest
+docker tag eu.gcr.io/rekhyt-damage-report/dashboard:${TRAVIS_TAG}-amd64 eu.gcr.io/rekhyt-damage-report/dashboard:${TRAVIS_TAG}
+docker images
+
 # push to GCR
 docker login --username _json_key --password "$(echo ${GC_CREDENTIALS} | base64 --decode -i)" https://eu.gcr.io
+docker push eu.gcr.io/rekhyt-damage-report/dashboard:${TRAVIS_TAG}
 docker push eu.gcr.io/rekhyt-damage-report/dashboard:${TRAVIS_TAG}-amd64
 docker push eu.gcr.io/rekhyt-damage-report/dashboard:${TRAVIS_TAG}-armv7
 
