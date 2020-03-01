@@ -15,25 +15,30 @@ docker images
 
 
 # arm
-#buildctl build --frontend dockerfile.v0 \
-#            --local dockerfile=. \
-#            --local context=. \
-#            --exporter image \
-#            --exporter-opt name=eu.gcr.io/rekhyt-damage-report/dashboard:${TRAVIS_TAG}-armv7 \
-#            --exporter-opt push=false \
-#            --frontend-opt platform=linux/armhf \
-#            --frontend-opt filename=./Dockerfile \
-#            --opt build-arg:IMAGE=balenalib/rpi-alpine-node:latest \
-#            --opt build-arg:BUILD_PRODUCTION=true \
-#            --opt build-arg:API_URL=${API_URL}
+buildctl build --frontend dockerfile.v0 \
+            --local dockerfile=. \
+            --local context=. \
+            --frontend-opt platform=linux/armhf \
+            --frontend-opt filename=./Dockerfile \
+            --output type=docker,name=eu.gcr.io/rekhyt-damage-report/dashboard:${TRAVIS_TAG}-arm7 \
+            --opt build-arg:IMAGE=balenalib/rpi-alpine-node:latest \
+            --opt build-arg:BUILD_PRODUCTION=true \
+            --opt build-arg:API_URL=${API_URL} \
+            | docker load
 
+docker images
+
+# re-tag without arch for manifest
+docker tag eu.gcr.io/rekhyt-damage-report/dashboard:${TRAVIS_TAG}-amd64 eu.gcr.io/rekhyt-damage-report/dashboard:${TRAVIS_TAG}
+
+# push to GCR
 docker login --username _json_key --password "$(echo ${GC_CREDENTIALS} | base64 --decode -i)" https://eu.gcr.io
+docker push eu.gcr.io/rekhyt-damage-report/dashboard:${TRAVIS_TAG}
 docker push eu.gcr.io/rekhyt-damage-report/dashboard:${TRAVIS_TAG}-amd64
 docker push eu.gcr.io/rekhyt-damage-report/dashboard:${TRAVIS_TAG}-armv7
 
+# create manifests for architectures
 export DOCKER_CLI_EXPERIMENTAL=enabled
-
-# manifest
 docker manifest create rekhyt-damage-report/dashboard:${TRAVIS_TAG} \
             rekhyt-damage-report/dashboard:${TRAVIS_TAG}-amd64 \
             rekhyt-damage-report/dashboard:${TRAVIS_TAG}-armv7
