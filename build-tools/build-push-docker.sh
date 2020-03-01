@@ -44,7 +44,7 @@ sudo docker manifest create eu.gcr.io/rekhyt-damage-report/dashboard:${TRAVIS_TA
             eu.gcr.io/rekhyt-damage-report/dashboard:${TRAVIS_TAG}-amd64 \
             eu.gcr.io/rekhyt-damage-report/dashboard:${TRAVIS_TAG}-armv7
 
-docker manifest annotate eu.gcr.io/rekhyt-damage-report/dashboard:${TRAVIS_TAG} eu.gcr.io/rekhyt-damage-report/dashboard:${TRAVIS_TAG}-armv7 --arch arm
-docker manifest annotate eu.gcr.io/rekhyt-damage-report/dashboard:${TRAVIS_TAG} eu.gcr.io/rekhyt-damage-report/dashboard:${TRAVIS_TAG}-amd64 --arch amd64
+sudo docker manifest annotate eu.gcr.io/rekhyt-damage-report/dashboard:${TRAVIS_TAG} eu.gcr.io/rekhyt-damage-report/dashboard:${TRAVIS_TAG}-armv7 --arch arm
+sudo docker manifest annotate eu.gcr.io/rekhyt-damage-report/dashboard:${TRAVIS_TAG} eu.gcr.io/rekhyt-damage-report/dashboard:${TRAVIS_TAG}-amd64 --arch amd64
 
-docker manifest push eu.gcr.io/rekhyt-damage-report/dashboard:${TRAVIS_TAG}
+sudo docker manifest push eu.gcr.io/rekhyt-damage-report/dashboard:${TRAVIS_TAG}
