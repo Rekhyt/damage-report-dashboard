@@ -6,9 +6,10 @@ buildctl build --frontend dockerfile.v0 \
             --local context=. \
             --frontend-opt platform=linux/amd64 \
             --frontend-opt filename=./Dockerfile \
-            --output type=image,name=eu.gcr.io/rekhyt-damage-report/dashboard:${TRAVIS_TAG}-amd64 \
+            --output type=docker,name=eu.gcr.io/rekhyt-damage-report/dashboard:${TRAVIS_TAG}-amd64 \
             --opt build-arg:BUILD_PRODUCTION=false \
-            --opt build-arg:API_URL=${API_URL}
+            --opt build-arg:API_URL=${API_URL} \
+            | docker load
 
 docker images
 
