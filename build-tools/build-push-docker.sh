@@ -40,7 +40,7 @@ docker push eu.gcr.io/rekhyt-damage-report/dashboard:${TRAVIS_TAG}-armv7
 
 # create manifests for architectures
 export DOCKER_CLI_EXPERIMENTAL=enabled
-docker manifest create eu.gcr.io/rekhyt-damage-report/dashboard:${TRAVIS_TAG} \
+sudo docker manifest create eu.gcr.io/rekhyt-damage-report/dashboard:${TRAVIS_TAG} \
             eu.gcr.io/rekhyt-damage-report/dashboard:${TRAVIS_TAG}-amd64 \
             eu.gcr.io/rekhyt-damage-report/dashboard:${TRAVIS_TAG}-armv7
 
