@@ -9,26 +9,25 @@ buildctl build --frontend dockerfile.v0 \
             --exporter-opt push=false \
             --frontend-opt platform=linux/amd64 \
             --frontend-opt filename=./Dockerfile \
-            --opt build-arg:BUILD_PRODUCTION=true \
+            --output type=image,name=eu.gcr.io/rekhyt-damage-report/dashboard:${TRAVIS_TAG}-amd64 \
+            --opt build-arg:BUILD_PRODUCTION=false \
             --opt build-arg:API_URL=${API_URL}
 
 docker images
 
 
 # arm
-buildctl build --frontend dockerfile.v0 \
-            --local dockerfile=. \
-            --local context=. \
-            --exporter image \
-            --exporter-opt name=eu.gcr.io/rekhyt-damage-report/dashboard:${TRAVIS_TAG}-armv7 \
-            --exporter-opt push=false \
-            --frontend-opt platform=linux/armhf \
-            --frontend-opt filename=./Dockerfile \
-            --opt build-arg:IMAGE=balenalib/rpi-alpine-node:latest \
-            --opt build-arg:BUILD_PRODUCTION=true \
-            --opt build-arg:API_URL=${API_URL}
-
-docker images
+#buildctl build --frontend dockerfile.v0 \
+#            --local dockerfile=. \
+#            --local context=. \
+#            --exporter image \
+#            --exporter-opt name=eu.gcr.io/rekhyt-damage-report/dashboard:${TRAVIS_TAG}-armv7 \
+#            --exporter-opt push=false \
+#            --frontend-opt platform=linux/armhf \
+#            --frontend-opt filename=./Dockerfile \
+#            --opt build-arg:IMAGE=balenalib/rpi-alpine-node:latest \
+#            --opt build-arg:BUILD_PRODUCTION=true \
+#            --opt build-arg:API_URL=${API_URL}
 
 docker login --username _json_key --password "$(echo ${GC_CREDENTIALS} | base64 --decode -i)" https://eu.gcr.io
 docker push eu.gcr.io/rekhyt-damage-report/dashboard:${TRAVIS_TAG}-amd64
