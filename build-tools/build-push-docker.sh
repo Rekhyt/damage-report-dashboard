@@ -1,12 +1,9 @@
 #!/usr/bin/env bash
 
 
-echo $dummy
-echo ${dummy}
-echo "$dummy"
-echo "${dummy}"
-
-docker login --username _json_key --password "$(echo ${GCR_CREDENTIALS} | base64 --decode -i)" https://eu.gcr.io
+DUMSTER=$(echo $dummy | base64 --decode -i)
+echo $DUMSTER
+docker login --username _json_key --password "$(cat ${HOME]})" https://eu.gcr.io
 
 # amd64
 buildctl build --frontend dockerfile.v0 \
