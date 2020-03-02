@@ -7,7 +7,7 @@ buildctl build --frontend dockerfile.v0 \
             --frontend-opt platform=linux/amd64 \
             --frontend-opt filename=./Dockerfile \
             --output type=docker,name=eu.gcr.io/rekhyt-damage-report/dashboard:${TRAVIS_TAG}-amd64 \
-            --opt build-arg:BUILD_PRODUCTION=false \
+            --opt build-arg:BUILD_PRODUCTION=true \
             --opt build-arg:API_URL=${API_URL} \
             | docker load
 
@@ -22,7 +22,7 @@ buildctl build --frontend dockerfile.v0 \
             --frontend-opt filename=./Dockerfile \
             --output type=docker,name=eu.gcr.io/rekhyt-damage-report/dashboard:${TRAVIS_TAG}-armv7 \
             --opt build-arg:IMAGE=balenalib/rpi-alpine-node:latest \
-            --opt build-arg:BUILD_PRODUCTION=false \
+            --opt build-arg:BUILD_PRODUCTION=true \
             --opt build-arg:API_URL=${API_URL} \
             | docker load
 
