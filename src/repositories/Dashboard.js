@@ -11,11 +11,15 @@ export default class {
   }
 
   async _fetchFromApi () {
-    this._data = await request({
-      url: this._apiUrl + '/dashboard',
-      method: 'get',
-      json: true
-    })
+    try {
+      this._data = await request({
+        url: this._apiUrl + '/dashboard',
+        method: 'get',
+        json: true
+      })
+    } catch (err) {
+      console.error(err)
+    }
   }
 
   get locationClimate () {
