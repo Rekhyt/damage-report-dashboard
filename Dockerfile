@@ -18,4 +18,4 @@ ENV REACT_APP_API_URL=${API_URL}
 RUN npm i && rm -rf /tmp/* /var/cache/apk/* /root/.npm /root/.node-gyp
 RUN if [ "${BUILD_PRODUCTION}" = "true" ]; then npm run build; fi
 
-CMD ["node", "server.js"]
+CMD ["npm", "run", "production"]
