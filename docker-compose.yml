@@ -7,10 +7,7 @@ services:
       - ${EXPOSED_PORT_API:-8000}:8000
 
   board:
-    build:
-      context: .
-      args:
-        - BUILD_PRODUCTION=false
+    build: .
     volumes:
       - ./package.json:/app/package.json
       - ./package-lock.json:/app/package-lock.json
@@ -18,4 +15,6 @@ services:
       - ./public:/app/public
     ports:
       - ${EXPOSED_PORT_BOARD:-3000}:3000
+    environment:
+      - REACT_APP_API_URL=http://localhost:${EXPOSED_PORT_API:-8000}
     command: npm start
