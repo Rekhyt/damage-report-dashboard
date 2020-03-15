@@ -2,7 +2,7 @@
 
 BUILD_PRODUCTION="${BUILD_PRODUCTION:-true}"
 API_URL="${API_URL:-http://localhost:8000}"
-TAG="${TAG:-development}"
+TAG="${TAG:-latest}"
 
 docker build \
   --build-arg BUILD_PRODUCTION=${BUILD_PRODUCTION} \
