@@ -7,7 +7,7 @@ Damage report, Bob.
 
 A simple dashboard displaying data from the [damage-report service](https://github.com/Rekhyt/damage-report).
 
-![Example|https://raw.githubusercontent.com/rekhyt/damage-report-dashboard/master/assets/example.jpg]
+![Example](https://raw.githubusercontent.com/rekhyt/damage-report-dashboard/master/assets/example.jpg)
 
 ## Quick Start
 To run the dashboard as a local service:
