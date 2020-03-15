@@ -40,8 +40,8 @@ export default class extends Component {
   }
 
   render () {
-    return <div>
-      <Grid container spacing={0} style={{ padding: '24px' }}>
+    return <div style={{ padding: '2em' }}>
+      <Grid container spacing={4}>
         {this.generateLocationClimateCards()}
       </Grid>
     </div>
