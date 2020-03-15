@@ -7,54 +7,49 @@ Damage report, Bob.
 
 A simple dashboard displaying data from the [damage-report service](https://github.com/Rekhyt/damage-report).
 
-## Run Locally
-### Configuration
+![Example|https://raw.githubusercontent.com/rekhyt/damage-report-dashboard/master/assets/example.jpg]
+
+## Quick Start
+To run the dashboard as a local service:
+
+    npm install && REACT_APP_API_URL=<API URL> npm run build && npm run production
+
+Or in a Docker container:
+
+    API_URL=<API URL> ./build.sh && docker run --rm -d -p 3000:3000 damage-report-dashoard
+
+## Development
+* `PORT` - port that the web server will listen on (Default: `3000`)
+* `REACT_APP_API_URL` - URL to the damage-report service API (Default: `http://localhost:8000`)
+
+### Running Locally
+To run the development server locally:
+
+    npm install && REACT_APP_API_URL=<API URL> npm run development
+
+### Running via Docker Compose (Recommended)
+To run dashboard and service in a development Docker stack:
+
+    docker-compose up -d
+
+Additional configuration:
 * `EXPOSED_PORT_API` - port via which the damage-report service API will be reachable (Default: `8000`)
 * `EXPOSED_PORT_BOARD` - port via which the damage-report dashboard will be reachable (Default: `3000`)
 * `REACT_APP_API_URL` - URL to the damage-report service API (Default: `http://localhost:8000`)
 
-### Docker Compose (Recommended)
-To run the whole stack, including API and dashboard:
-`docker-compose up -d`
+## Building
+### Locally
 
-To only run the dashboard and service API on another machine in the LAN:
-`REACT_APP_API_URL=http://192.168.1.12:8000 docker-compose up -d`
+    REACT_APP_API_URL=<API URL> npm run build
 
-### Natively
-To run the board on your local system:<br />`npm start`
-
-Specify a service API location different from http://localhost:8000:<br />
-`REACT_APP_API_URL=http://192.168.1.12:8000 npm start`
-
-## Build
-### Configuration
-* `BUILD_PRODUCTION` - whether to create an optimized production build (Default: "true") (*)
-* `API_URL` - URL to the damage-report service API (Default: `http://localhost:8000`) (**)
+### Docker
+#### Configuration
+* `BUILD_PRODUCTION` - whether to create an optimized production build (Default: "true")
+* `API_URL` - URL to the damage-report service API (Default: `http://localhost:8000`)
 * `TAG` - desired image tag name (Default: `development`)
 
-(\*) This takes a while, so if you only need a development version you should set this to "false".<br />
-(**) This will only affect the production build where the URL can't be changed after the build has finished.
+#### Build
+Use the `build.sh` or `build-arm.sh` script to build an amd64 or armv7 image:
 
-### Build & Run
-#### Build amd64 Optimized
-`BUILD_PRODUCTION=true API_URL=http://192.168.1.12:8000 ./build.sh`
-
-To run the production build:<br />
-`docker run --rm -d -p 3000:3000 damage-report-dashboard:development`
-
-To run the development version:<br />
-`docker run --rm -d -p 3000:3000 damage-report-dashboard:development npm start`
-
-Note that you can still supply a different damage-report service API URL to the development version but not to the
-production build.
-
-Examples:
-
-This will work with the passed API URL:<br />
-`docker run --rm -d -p 3000:3000 -e REACT_APP_API_URL=http://192.168.1.5 damage-report-dashboard:development npm start`
-
-This will have no effect and run with the API URL that was used during build:<br />
-`docker run --rm -d -p 3000:3000 -e REACT_APP_API_URL=http://192.168.1.5 damage-report-dashboard:development`
-
-#### Build armv7 Optimized
-The above manual applies, just use `build-arm.sh` instead of `build.sh`.
+    API_URL=<API URL> ./build.sh
+    API_URL=<API URL> ./build-arm.sh
